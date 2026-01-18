@@ -108,8 +108,8 @@ main#members-page {
 }
 
 .member-photo img {
-    width: 170px;
-    height: 220px;
+    width: 350px;
+    height: 400px;
     object-fit: cover;
     border-radius: 16px;
     border: 2px solid #6d0031;
