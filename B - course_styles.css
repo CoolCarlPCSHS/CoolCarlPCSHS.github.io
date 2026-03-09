@@ -3,8 +3,9 @@ body {
     padding: 0;
     box-sizing: border-box;
     font-family: var(--font-body);
-    background: #ffd6e6;
+    background: radial-gradient(circle at 15% 20%, #ffe3ef 0%, #ffd6e6 45%, #f7c8df 100%);
     color: #6d0031;
+    overflow-x: hidden;
 }
 
 /* Course Tribute Layout */
@@ -15,6 +16,42 @@ body {
     gap: 3rem;
     align-items: start;
     padding: 6rem 4vw 5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+#course-tribute::before,
+#course-tribute::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.6;
+    filter: blur(2px);
+    z-index: 0;
+}
+
+#course-tribute::before {
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), rgba(255, 139, 111, 0.35));
+    top: -60px;
+    left: -60px;
+    animation: float-soft 12s ease-in-out infinite;
+}
+
+#course-tribute::after {
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle at 70% 40%, rgba(255, 255, 255, 0.8), rgba(201, 130, 162, 0.35));
+    bottom: -80px;
+    right: -40px;
+    animation: float-soft 14s ease-in-out infinite;
+}
+
+#course-tribute > * {
+    position: relative;
+    z-index: 1;
 }
 
 .tribute-left {
@@ -31,6 +68,7 @@ body {
     font-family: var(--font-display);
     font-size: clamp(1.4rem, 2.6vw, 2rem);
     margin: 0;
+    animation: fade-up 700ms ease forwards;
 }
 
 .photo-frame {
@@ -42,6 +80,7 @@ body {
     transform: rotate(-3deg);
     display: grid;
     place-items: center;
+    animation: float-card 8s ease-in-out infinite;
 }
 
 .teacher-photo {
@@ -68,6 +107,7 @@ body {
     display: grid;
     gap: 1.2rem;
     align-content: start;
+    animation: fade-up 700ms ease forwards;
 }
 
 .tribute-kicker {
@@ -97,6 +137,8 @@ body {
     font-size: clamp(1.6rem, 3vw, 2.4rem);
     font-weight: 700;
     letter-spacing: 0.04em;
+    box-shadow: 0 12px 20px rgba(255, 139, 111, 0.35);
+    animation: pulse 2.8s ease-in-out infinite;
 }
 
 .tribute-copy {
@@ -108,6 +150,70 @@ body {
 .tribute-copy p {
     margin: 0;
     max-width: 640px;
+    padding: 0.9rem 1.2rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 16px;
+    border: 1px solid rgba(109, 0, 49, 0.15);
+}
+
+.tribute-copy p:nth-child(1) { animation: fade-up 700ms ease forwards 120ms; }
+.tribute-copy p:nth-child(2) { animation: fade-up 700ms ease forwards 220ms; }
+.tribute-copy p:nth-child(3) { animation: fade-up 700ms ease forwards 320ms; }
+
+@keyframes fade-up {
+    0% {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float-card {
+    0% {
+        transform: rotate(-3deg) translateY(0);
+    }
+    50% {
+        transform: rotate(-2deg) translateY(-10px);
+    }
+    100% {
+        transform: rotate(-3deg) translateY(0);
+    }
+}
+
+@keyframes float-soft {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-12px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.03);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .teacher-role,
+    .tribute-right,
+    .title-pill,
+    .tribute-copy p,
+    .photo-frame,
+    #course-tribute::before,
+    #course-tribute::after {
+        animation: none;
+    }
 }
 
 @media (max-width: 900px) {

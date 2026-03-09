@@ -105,6 +105,11 @@ main#members-page {
 .member-photo {
     display: grid;
     place-items: center;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
 }
 
 .member-photo img {
@@ -117,9 +122,96 @@ main#members-page {
     transition: transform 220ms ease, box-shadow 220ms ease;
 }
 
+.photo-hint {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 244, 248, 0.9);
+    color: #5a1f3a;
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+    border: 2px solid #6d0031;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.member-photo:hover .photo-hint,
+.member-photo:focus-visible .photo-hint {
+    opacity: 1;
+    transform: translate(-50%, -4px);
+}
+
 .member-card:hover .member-photo img {
     transform: scale(1.04);
     box-shadow: 0 12px 18px rgba(109, 0, 49, 0.18);
+}
+
+.member-video-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    place-items: center;
+    padding: 2rem 1.5rem;
+    background: rgba(38, 9, 22, 0.7);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+}
+
+.member-video-modal.is-open {
+    display: grid;
+}
+
+.member-video-surface {
+    width: min(900px, 92vw);
+    background: #fff4f8;
+    border-radius: 22px;
+    border: 2px solid #6d0031;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+    padding: 1.2rem 1.2rem 1.6rem;
+    position: relative;
+    display: grid;
+    gap: 1rem;
+}
+
+.member-video-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid #6d0031;
+    background: #fff;
+    color: #5a1f3a;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+}
+
+.member-video-frame {
+    display: grid;
+    gap: 0.8rem;
+    margin-top: 2.2rem;
+}
+
+.member-video-frame video {
+    width: 100%;
+    border-radius: 16px;
+    border: 2px solid #6d0031;
+    background: #000;
+}
+
+.member-video-title {
+    margin: 0;
+    font-weight: 700;
+    color: #5a1f3a;
+    font-size: 1rem;
+    text-align: center;
 }
 
 .member-desc {

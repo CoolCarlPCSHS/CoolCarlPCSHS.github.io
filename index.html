@@ -44,14 +44,144 @@
             </div>
         </section>
 
+        <section id="circle-overview">
+            <div class="overview-shell">
+                <div class="overview-content">
+                    <div class="overview-text reveal">
+                        <header class="overview-header">
+                            <p class="overview-kicker">The Circle</p>
+                            <h2>Ctrl + Meyer</h2>
+                        </header>
+                        <p class="overview-lead">
+                            Ctrl + Meyer is a team of Grade 12 Senior High School students from Pasig City Science High School
+                            of nearby areas in Pasig City, united by creativity, curiosity, and a drive to explore technology
+                            and design. Each member brings unique interests and skills from animation, content creation, and
+                            layout design to idea generation and problem-solving.
+                        </p>
+                    </div>
+
+                    <div class="overview-cards">
+                        <article class="overview-card reveal">
+                            <h3>Our Mission</h3>
+                            <p>Their mission is to promote creativity, create engaging learning experiences, inspire others, and enhance their skills when using technology.</p>
+                        </article>
+                        <article class="overview-card reveal">
+                            <h3>Our Values</h3>
+                            <p>This group values teamwork, communication, and creativity, allowing one to use their full potential in creating.</p>
+                        </article>
+                        <article class="overview-card reveal">
+                            <h3>Our Goal</h3>
+                            <p>Through effective communication and mutual support, the group aims to produce high-quality outputs that demonstrate their passion and effort in creating useful innovations.</p>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="project-preview reveal">
+                    <h3>Featured Projects</h3>
+                    <p>Each refresh highlights two random student animations.</p>
+                    <div class="project-preview-grid" id="random-projects"></div>
+                </div>
+            </div>
+        </section>
+
         
 
 
     
     </main>
 
-    <footer>
-        <a href="https://youtu.be/IzeC7_ITHYA?si=L9eI3zWP7o9_bSSZ">EmpTech ePortfolio</a> © 2026 by <a href="https://www.youtube.com/@coolarity">Carl Angelo</a> is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">
+    <footer class="site-footer">
+        <p class="license-line">
+            <a href="https://youtu.be/IzeC7_ITHYA?si=L9eI3zWP7o9_bSSZ">EmpTech ePortfolio</a>
+            <span>© 2026</span>
+            <span>by</span>
+            <a href="https://www.youtube.com/@coolarity">Carl Angelo</a>
+        </p>
+        <p class="license-line">
+            Licensed under
+            <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+            <span class="license-icons" aria-hidden="true">
+                <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="">
+                <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="">
+            </span>
+        </p>
     </footer>
 
     <script src="page-transition.js"></script>
+    <script>
+        const revealItems = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.18 }
+        );
+
+        revealItems.forEach((item) => revealObserver.observe(item));
+
+        const projectGrid = document.getElementById('random-projects');
+        const projectVideos = [
+            {
+                title: '"What Does The Fox Say?" by Ruveline Baraquia',
+                src: 'Videos/BARAQUIA/RUBY - EMPTECH.mp4'
+            },
+            {
+                title: '"Shark Out of Duty" by Ivy De Leon',
+                src: 'Videos/DE LEON/DE LEON ANIMATION.mp4'
+            },
+            {
+                title: '"Jurassic Jog" by Erin Legaspi',
+                src: 'Videos/LEGASPI/Q3_Animation PeTa_ LEGASPI-MEYER.mp4'
+            },
+            {
+                title: '"Animation" by Margarette Lobien',
+                src: 'Videos/LOBIEN/Lobien_Animation (EmpTech).mp4'
+            },
+            {
+                title: '"T-Rex Traffic" by Reema Maagma',
+                src: 'Videos/MAAGMA/MAAGMA - ANIMATION.mp4'
+            },
+            {
+                title: '"Music to My Ears" by Xyra Remoto',
+                src: 'Videos/REMOTO/Remoto.mp4'
+            },
+            {
+                title: '"Title" by Gian Tan',
+                src: 'Videos/TAN/Presentation1.mp4'
+            },
+            {
+                title: '"Earth" by Carl Angelo Morte',
+                src: 'Videos/MORTE/pptDF4C.pptm  -  AutoRecovered.mp4'
+            }
+        ];
+
+        const pickRandomProjects = (items, count = 2) => {
+            const shuffled = [...items].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        };
+
+        if (projectGrid) {
+            const selected = pickRandomProjects(projectVideos, 2);
+            projectGrid.innerHTML = selected
+                .map(
+                    (video) => `
+                        <article class="project-preview-card">
+                            <div class="project-preview-media">
+                                <video controls preload="metadata">
+                                    <source src="${video.src}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <p class="project-preview-title">${video.title}</p>
+                        </article>
+                    `
+                )
+                .join('');
+        }
+    </script>
